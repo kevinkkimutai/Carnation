@@ -1,0 +1,202 @@
+[
+    {
+        "id": 1,
+        "name": "Airbags",
+        "type": "safety"
+    },
+    {
+        "id": 2,
+        "name": "Anti-lock Braking System (ABS)",
+        "type": "safety"
+    },
+    {
+        "id": 3,
+        "name": "Electronic Stability Control (ESC)",
+        "type": "safety"
+    },
+    {
+        "id": 4,
+        "name": "Lane Departure Warning",
+        "type": "safety"
+    },
+    {
+        "id": 5,
+        "name": "Blind Spot Monitoring",
+        "type": "safety"
+    },
+    {
+        "id": 6,
+        "name": "Adaptive Cruise Control",
+        "type": "safety"
+    },
+    {
+        "id": 7,
+        "name": "Forward Collision Warning",
+        "type": "safety"
+    },
+    {
+        "id": 8,
+        "name": "Automatic Emergency Braking",
+        "type": "safety"
+    },
+    {
+        "id": 9,
+        "name": "Traction Control",
+        "type": "safety"
+    },
+    {
+        "id": 10,
+        "name": "Rearview Camera",
+        "type": "safety"
+    },
+    {
+        "id": 11,
+        "name": "Parking Sensors",
+        "type": "safety"
+    },
+    {
+        "id": 12,
+        "name": "Rear Cross-Traffic Alert",
+        "type": "safety"
+    },
+    {
+        "id": 13,
+        "name": "Adaptive Headlights",
+        "type": "safety"
+    },
+    {
+        "id": 14,
+        "name": "Lane Keeping Assist",
+        "type": "safety"
+    },
+    {
+        "id": 15,
+        "name": "Pedestrian Detection",
+        "type": "safety"
+    },
+    {
+        "id": 16,
+        "name": "Rain-Sensing Wipers",
+        "type": "safety"
+    },
+    {
+        "id": 17,
+        "name": "Child Safety Locks",
+        "type": "safety"
+    },
+    {
+        "id": 18,
+        "name": "Seatbelt Pretensioners",
+        "type": "safety"
+    },
+    {
+        "id": 19,
+        "name": "Automatic High Beams",
+        "type": "safety"
+    },
+    {
+        "id": 20,
+        "name": "Traffic Sign Recognition",
+        "type": "safety"
+    },
+    {
+        "id": 21,
+        "name": "Leather Seats",
+        "type": "comfort"
+    },
+    {
+        "id": 22,
+        "name": "Heated Seats",
+        "type": "comfort"
+    },
+    {
+        "id": 23,
+        "name": "Dual-Zone Climate Control",
+        "type": "comfort"
+    },
+    {
+        "id": 24,
+        "name": "Keyless Entry and Start",
+        "type": "comfort"
+    },
+    {
+        "id": 25,
+        "name": "Sunroof",
+        "type": "comfort"
+    },
+    {
+        "id": 26,
+        "name": "Power Adjustable Seats",
+        "type": "comfort"
+    },
+    {
+        "id": 27,
+        "name": "Memory Seats",
+        "type": "comfort"
+    },
+    {
+        "id": 28,
+        "name": "Ventilated Seats",
+        "type": "comfort"
+    },
+    {
+        "id": 29,
+        "name": "Heated Steering Wheel",
+        "type": "comfort"
+    },
+    {
+        "id": 30,
+        "name": "Auto-Dimming Rearview Mirror",
+        "type": "comfort"
+    },
+    {
+        "id": 31,
+        "name": "Premium Sound System",
+        "type": "comfort"
+    },
+    {
+        "id": 32,
+        "name": "Navigation System",
+        "type": "comfort"
+    },
+    {
+        "id": 33,
+        "name": "Wireless Phone Charging",
+        "type": "comfort"
+    },
+    {
+        "id": 34,
+        "name": "Hands-Free Liftgate",
+        "type": "comfort"
+    },
+    {
+        "id": 35,
+        "name": "Power Folding Mirrors",
+        "type": "comfort"
+    },
+    {
+        "id": 36,
+        "name": "Cruise Control",
+        "type": "comfort"
+    },
+    {
+        "id": 37,
+        "name": "Panoramic Roof",
+        "type": "comfort"
+    },
+    {
+        "id": 38,
+        "name": "Ambient Lighting",
+        "type": "comfort"
+    },
+    {
+        "id": 39,
+        "name": "Rear Window Sunshades",
+        "type": "comfort"
+    },
+    {
+        "id": 40,
+        "name": "Massaging Seats",
+        "type": "comfort"
+    }
+]
