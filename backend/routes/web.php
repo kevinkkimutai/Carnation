@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -16,11 +17,17 @@ Route::prefix('auth')->group(function () {
         Route::get('/new/{token}', [AuthController::class, 'newPassword'])->name('admin.password.new');
         Route::post('/newPassword', [AuthController::class, 'submitPassword'])->name('admin.password.new.submit');
     });
-    Route::middleware(['admin'])->group(function () {
-        Route::get('/', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
-    });
 
 });
+
+Route::middleware(['admin'])->group(function () {
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+    });
+    Route::resource('inventory', CarController::class);
+
+});
+
 
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
