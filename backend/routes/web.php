@@ -24,7 +24,12 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
     });
-    Route::resource('inventory', CarController::class);
+    Route::prefix('admin')->group(function () {
+        Route::resource('inventory', CarController::class);
+        Route::get('inventory/set_featured', [CarController::class, 'setFeatured'])->name('admin.inventory.setFeatured');
+        Route::get('inventory/remove_featured', [CarController::class, 'removeFeatured'])->name('admin.inventory.removeFeatured');
+        Route::get('inventory/manage_images', [CarController::class, 'manageImages'])->name('admin.inventory.manageImages');
+    });
 
 });
 

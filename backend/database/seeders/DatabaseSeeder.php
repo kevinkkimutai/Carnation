@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(CarMakeModelSeeder::class);
         $this->call(CarFeaturesSeeder::class);
+        $this->call(BodyTypesTableSeeder::class);
+        $this->call(InteriorTableSeeder::class);
     }
 }

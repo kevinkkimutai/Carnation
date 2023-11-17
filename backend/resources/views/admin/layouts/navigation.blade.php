@@ -18,7 +18,7 @@
                 <li class="menu-title" key="t-apps">Inventory(Cars)</li>
 
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('inventory.create') }}" class=" waves-effect">
                         <i class="bx bx-plus"></i>
                         <span key="t-layouts">Add new</span>
                     </a>

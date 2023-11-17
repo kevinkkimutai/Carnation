@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Models\BodyType;
 use App\Models\Car;
+use App\Models\CarFeature;
+use App\Models\CarMake;
+use App\Models\CarModel;
+use App\Models\Interior;
 
 class CarController extends Controller
 {
@@ -22,7 +27,16 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $bodyTypes = BodyType::all();
+        $carMakes = CarMake::all();
+        $carModels = CarModel::all();
+        $interiors = Interior::all();
+        $comfortFeatures = CarFeature::where('type', CarFeature::TYPE_COMFORT)->get();
+        $safetyFeature = CarFeature::where('type', CarFeature::TYPE_SAFETY)->get();
+        return view(
+            "admin.inventory.create",
+            compact("bodyTypes", "carMakes", "carModels", "interiors", "comfortFeatures", "safetyFeature")
+        );
     }
 
     /**
