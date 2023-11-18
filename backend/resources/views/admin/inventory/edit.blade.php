@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Add vehicle')
+@section('title', 'Edit ' . $details->title)
 @section('content')
     <div class="main-content">
 
@@ -10,12 +10,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Add Vehicle (Step 1)</h4>
+                            <h4 class="mb-sm-0 font-size-18">Edit {{ $details->title }}</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Inventory</a></li>
-                                    <li class="breadcrumb-item active">Add Vehicle (Step 1)</li>
+                                    <li class="breadcrumb-item">{{ $details->title }}</a></li>
+                                    <li class="breadcrumb-item active">Edit</li>
                                 </ol>
                             </div>
 
@@ -32,14 +33,15 @@
                                 <h4 class="card-title">Basic Information</h4>
                                 @include('partials.info')
 
-                                <form method="POST" action="{{ route('inventory.store') }}">
+                                <form method="post" action="{{ route('inventory.update.submit', $details->slug) }}">
+
                                     @csrf
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="mb-3">
                                                 <label for="productname">Title</label>
                                                 <input id="productname" name="title" type="text" class="form-control"
-                                                    placeholder="Product Name" value="{{ old('title') }}">
+                                                    placeholder="Product Name" value="{{ $details->title }}">
 
                                                 @error('title')
                                                     <div class="text-sm text-danger">
@@ -70,7 +72,7 @@
 
                                                     @foreach ($carMakes as $item)
                                                         <option value="{{ $item->id }}"
-                                                            {{ old('make_id') == $item->id ? 'selected' : '' }}>
+                                                            {{ $details->make_id == $item->id ? 'selected' : '' }}>
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -87,7 +89,7 @@
                                                 <select class="form-control select2" name="model_id">
                                                     @foreach ($carModels as $item)
                                                         <option value="{{ $item->id }}"
-                                                            {{ old('model_id') == $item->slug ? 'selected' : '' }}>
+                                                            {{ $details->model_id == $item->slug ? 'selected' : '' }}>
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -105,7 +107,7 @@
 
                                                     @foreach ($bodyTypes as $item)
                                                         <option value="{{ $item->slug }}"
-                                                            {{ old('body_type') == $item->slug ? 'selected' : '' }}>
+                                                            {{ $details->body_type == $item->slug ? 'selected' : '' }}>
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -120,7 +122,7 @@
                                             <div class="mb-3">
                                                 <label for="manufacturerbrand">Year</label>
                                                 <input id="manufacturerbrand" name="year" type="number"
-                                                    class="form-control" placeholder="YOM" value="{{ old('year') }}">
+                                                    class="form-control" placeholder="YOM" value="{{ $details->year }}">
                                                 @error('year')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -133,7 +135,7 @@
                                                 <label for="manufacturerbrand">Mileage (KM)</label>
                                                 <input id="manufacturerbrand" name="mileage" type="number"
                                                     class="form-control" placeholder="Mileage"
-                                                    value="{{ old('mileage') }}">
+                                                    value="{{ $details->mileage }}">
                                                 @error('mileage')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -145,7 +147,7 @@
                                             <div class="mb-3">
                                                 <label for="manufacturerbrand">CC</label>
                                                 <input id="manufacturerbrand" name="cc" type="number"
-                                                    class="form-control" placeholder="CC" value="{{ old('cc') }}">
+                                                    class="form-control" placeholder="CC" value="{{ $details->cc }}">
                                                 @error('cc')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -157,7 +159,7 @@
                                             <div class="mb-3">
                                                 <label for="price">Price</label>
                                                 <input id="price" name="price" type="text" class="form-control"
-                                                    placeholder="Price" value="{{ old('price') }}">
+                                                    placeholder="Price" value="{{ $details->price }}">
                                             </div>
                                         </div>
 
@@ -166,10 +168,11 @@
                                                 <label for="manufacturername">Transmission</label>
                                                 <select class="form-control select2" name="transmission">
                                                     <option value="automatic"
-                                                        {{ old('transmission') == 'automatic' ? 'selected' : '' }}>
+                                                        {{ $details->transmission == 'automatic' ? 'selected' : '' }}>
                                                         Automatic</option>
                                                     <option value="manual"
-                                                        {{ old('manual') == 'automatic' ? 'selected' : '' }}>Manual
+                                                        {{ $details->manual == 'automatic' ? 'selected' : '' }}>
+                                                        Manual
                                                     </option>
                                                 </select>
                                                 @error('transmission')
@@ -185,7 +188,7 @@
                                                 <select class="form-control select2" name="interior">
 
                                                     @foreach ($interiors as $item)
-                                                        <option {{ old('interior') == $item->slug ? 'selected' : '' }}
+                                                        <option {{ $details->interior == $item->slug ? 'selected' : '' }}
                                                             value="{{ $item->slug }}">{{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -201,49 +204,56 @@
                                                 <label for="manufacturername">Drive train</label>
                                                 <select class="form-control select2" name="drive_train">
                                                     <option value="fwd"
-                                                        {{ old('drive_train') == 'fwd' ? 'selected' : '' }}>Front-Wheel
+                                                        {{ $details->drive_train == 'fwd' ? 'selected' : '' }}>
+                                                        Front-Wheel
                                                         (FWD)</option>
                                                     <option value="rwd"
-                                                        {{ old('drive_train') == 'rwd' ? 'selected' : '' }}>Rear-Wheel
+                                                        {{ $details->drive_train == 'rwd' ? 'selected' : '' }}>
+                                                        Rear-Wheel
                                                         (RWD)</option>
                                                     <option value="awd"
-                                                        {{ old('drive_train') == 'awd' ? 'selected' : '' }}>All-Wheel (AWD)
+                                                        {{ $details->drive_train == 'awd' ? 'selected' : '' }}>
+                                                        All-Wheel (AWD)
                                                     </option>
                                                     <option value="4wd"
-                                                        {{ old('drive_train') == '4wd' ? 'selected' : '' }}>Four-Wheel
+                                                        {{ $details->drive_train == '4wd' ? 'selected' : '' }}>
+                                                        Four-Wheel
                                                         (4WD)</option>
                                                     <option value="part-time-4wd"
-                                                        {{ old('drive_train') == 'part-time-4wd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'part-time-4wd' ? 'selected' : '' }}>
                                                         Part-Time Four-Wheel</option>
                                                     <option value="selectable-4wd"
-                                                        {{ old('drive_train') == 'selectable-4wd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'selectable-4wd' ? 'selected' : '' }}>
                                                         Selectable Four-Wheel</option>
                                                     <option value="electric-fwd"
-                                                        {{ old('drive_train') == 'electric-fwd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'electric-fwd' ? 'selected' : '' }}>
                                                         Electric Front-Wheel</option>
                                                     <option value="electric-rwd"
-                                                        {{ old('drive_train') == 'electric-rwd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'electric-rwd' ? 'selected' : '' }}>
                                                         Electric Rear-Wheel</option>
                                                     <option value="electric-awd"
-                                                        {{ old('drive_train') == 'electric-awd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'electric-awd' ? 'selected' : '' }}>
                                                         Electric All-Wheel</option>
                                                     <option value="hybrid-fwd"
-                                                        {{ old('drive_train') == 'hybrid-fwd' ? 'selected' : '' }}>Hybrid
+                                                        {{ $details->drive_train == 'hybrid-fwd' ? 'selected' : '' }}>
+                                                        Hybrid
                                                         Front-Wheel</option>
                                                     <option value="hybrid-rwd"
-                                                        {{ old('drive_train') == 'hybrid-rwd' ? 'selected' : '' }}>Hybrid
+                                                        {{ $details->drive_train == 'hybrid-rwd' ? 'selected' : '' }}>
+                                                        Hybrid
                                                         Rear-Wheel</option>
                                                     <option value="hybrid-awd"
-                                                        {{ old('drive_train') == 'hybrid-awd' ? 'selected' : '' }}>Hybrid
+                                                        {{ $details->drive_train == 'hybrid-awd' ? 'selected' : '' }}>
+                                                        Hybrid
                                                         All-Wheel</option>
                                                     <option value="plug-in-hybrid-fwd"
-                                                        {{ old('drive_train') == 'plug-in-hybrid-fwd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'plug-in-hybrid-fwd' ? 'selected' : '' }}>
                                                         Plug-In Hybrid Front-Wheel</option>
                                                     <option value="plug-in-hybrid-rwd"
-                                                        {{ old('drive_train') == 'plug-in-hybrid-rwd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'plug-in-hybrid-rwd' ? 'selected' : '' }}>
                                                         Plug-In Hybrid Rear-Wheel</option>
                                                     <option value="plug-in-hybrid-awd"
-                                                        {{ old('drive_train') == 'plug-in-hybrid-awd' ? 'selected' : '' }}>
+                                                        {{ $details->drive_train == 'plug-in-hybrid-awd' ? 'selected' : '' }}>
                                                         Plug-In Hybrid All-Wheel</option>
                                                 </select>
                                                 @error('drive_train')
@@ -258,25 +268,31 @@
                                                 <label for="manufacturername">Fuel</label>
                                                 <select class="form-control select2" name="fuel">
                                                     <option value="petrol"
-                                                        {{ old('fuel') == 'petrol' ? 'selected' : '' }}>Petrol</option>
+                                                        {{ $details->fuel == 'petrol' ? 'selected' : '' }}>Petrol</option>
                                                     <option value="diesel"
-                                                        {{ old('fuel') == 'diesel' ? 'selected' : '' }}>Diesel</option>
+                                                        {{ $details->fuel == 'diesel' ? 'selected' : '' }}>Diesel</option>
                                                     <option value="electric"
-                                                        {{ old('fuel') == 'electric' ? 'selected' : '' }}>Electric</option>
+                                                        {{ $details->fuel == 'electric' ? 'selected' : '' }}>
+                                                        Electric</option>
                                                     <option value="hybrid"
-                                                        {{ old('fuel') == 'hybrid' ? 'selected' : '' }}>Hybrid</option>
+                                                        {{ $details->fuel == 'hybrid' ? 'selected' : '' }}>Hybrid</option>
                                                     <option value="plug-in-hybrid"
-                                                        {{ old('fuel') == 'plug-in-hybrid' ? 'selected' : '' }}>Plug-In
+                                                        {{ $details->fuel == 'plug-in-hybrid' ? 'selected' : '' }}>
+                                                        Plug-In
                                                         Hybrid</option>
                                                     <option value="natural-gas"
-                                                        {{ old('fuel') == 'natural-gas' ? 'selected' : '' }}>Natural Gas
+                                                        {{ $details->fuel == 'natural-gas' ? 'selected' : '' }}>
+                                                        Natural Gas
                                                     </option>
                                                     <option value="hydrogen"
-                                                        {{ old('fuel') == 'hydrogen' ? 'selected' : '' }}>Hydrogen</option>
+                                                        {{ $details->fuel == 'hydrogen' ? 'selected' : '' }}>
+                                                        Hydrogen</option>
                                                     <option value="biofuel"
-                                                        {{ old('fuel') == 'biofuel' ? 'selected' : '' }}>Biofuel</option>
+                                                        {{ $details->fuel == 'biofuel' ? 'selected' : '' }}>Biofuel
+                                                    </option>
                                                     <option value="flex-fuel"
-                                                        {{ old('fuel') == 'flex-fuel' ? 'selected' : '' }}>Flex Fuel
+                                                        {{ $details->fuel == 'flex-fuel' ? 'selected' : '' }}>
+                                                        Flex Fuel
                                                     </option>
                                                 </select>
                                                 @error('fuel')
@@ -290,11 +306,11 @@
                                             <div class="mb-3">
                                                 <label for="manufacturername">Usage</label>
                                                 <select class="form-control select2" name="car_usage">
-                                                    <option {{ old('car_usage') == 'new' ? 'selected' : '' }}
+                                                    <option {{ $details->car_usage == 'new' ? 'selected' : '' }}
                                                         value="new">New</option>
-                                                    <option {{ old('car_usage') == 'foreign' ? 'selected' : '' }}
+                                                    <option {{ $details->car_usage == 'foreign' ? 'selected' : '' }}
                                                         value="foreign">Foreign Used</option>
-                                                    <option {{ old('car_usage') == 'local' ? 'selected' : '' }}
+                                                    <option {{ $details->car_usage == 'local' ? 'selected' : '' }}
                                                         value="local">Locally used</option>
                                                 </select>
                                                 @error('car_usage')
@@ -309,10 +325,10 @@
                                                 <label for="manufacturername">Availability</label>
                                                 <select class="form-control select2" name="availability">
                                                     <option value="available"
-                                                        {{ old('availability') == 'available' ? 'selected' : '' }}>
+                                                        {{ $details->availability == 'available' ? 'selected' : '' }}>
                                                         Available</option>
                                                     <option value="unavailable"
-                                                        {{ old('availability') == 'unavailable' ? 'selected' : '' }}>
+                                                        {{ $details->availability == 'unavailable' ? 'selected' : '' }}>
                                                         Unavailable</option>
                                                 </select>
                                                 @error('availability')
@@ -328,7 +344,7 @@
                                                 <label for="manufacturerbrand">Color</label>
                                                 <input id="manufacturerbrand" name="color" type="text"
                                                     class="form-control" placeholder="Color"
-                                                    value="{{ old('color') }}">
+                                                    value="{{ $details->color }}">
                                                 @error('color')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -341,7 +357,7 @@
                                                 <label for="manufacturerbrand">Top Speed</label>
                                                 <input id="manufacturerbrand" name="top_speed" type="number"
                                                     class="form-control" placeholder="Top Speed"
-                                                    value="{{ old('top_speed') }}">
+                                                    value="{{ $details->top_speed }}">
                                                 @error('top_speed')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -354,7 +370,7 @@
                                                 <label for="manufacturerbrand">Number of seats</label>
                                                 <input id="manufacturerbrand" name="seat_number" type="number"
                                                     class="form-control" placeholder="Number of seats"
-                                                    value="{{ old('seat_number') }}">
+                                                    value="{{ $details->seat_number }}">
                                                 @error('seat_number')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -368,7 +384,7 @@
                                                 <label for="manufacturerbrand">Number of doors</label>
                                                 <input id="manufacturerbrand" name="doors" type="number"
                                                     class="form-control" placeholder="Number of doors"
-                                                    value="{{ old('doors') }}">
+                                                    value="{{ $details->doors }}">
                                                 @error('doors')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}
@@ -381,13 +397,16 @@
                                                 <label for="manufacturerbrand">Steering position</label>
                                                 <select class="form-control select2" name="steering">
                                                     <option value="left"
-                                                        {{ old('steering') == 'left' ? 'selected' : '' }}>Left-Hand Drive
+                                                        {{ $details->steering == 'left' ? 'selected' : '' }}>Left-Hand
+                                                        Drive
                                                         (LHD)</option>
                                                     <option value="right"
-                                                        {{ old('steering') == 'right' ? 'selected' : '' }}>Right-Hand Drive
+                                                        {{ $details->steering == 'right' ? 'selected' : '' }}>
+                                                        Right-Hand Drive
                                                         (RHD)</option>
                                                     <option value="center"
-                                                        {{ old('steering') == 'center' ? 'selected' : '' }}>Center-Steer
+                                                        {{ $details->steering == 'center' ? 'selected' : '' }}>
+                                                        Center-Steer
                                                     </option>
                                                 </select>
                                                 @error('steering')
@@ -402,16 +421,19 @@
                                                 <label for="manufacturerbrand">Steering type</label>
                                                 <select class="form-control select2" name="steering_type">
                                                     <option value="manual"
-                                                        {{ old('steering_type') == 'manual' ? 'selected' : '' }}>Manual
+                                                        {{ $details->steering_type == 'manual' ? 'selected' : '' }}>
+                                                        Manual
                                                         Steering</option>
                                                     <option value="power"
-                                                        {{ old('steering_type') == 'power' ? 'selected' : '' }}>Power
+                                                        {{ $details->steering_type == 'power' ? 'selected' : '' }}>
+                                                        Power
                                                         Steering</option>
                                                     <option value="electric"
-                                                        {{ old('steering_type') == 'electric' ? 'selected' : '' }}>Electric
+                                                        {{ $details->steering_type == 'electric' ? 'selected' : '' }}>
+                                                        Electric
                                                         Power Steering (EPS)</option>
                                                     <option value="hydraulic"
-                                                        {{ old('steering_type') == 'hydraulic' ? 'selected' : '' }}>
+                                                        {{ $details->steering_type == 'hydraulic' ? 'selected' : '' }}>
                                                         Hydraulic Power Steering</option>
                                                 </select>
                                                 @error('steering_type')
@@ -442,7 +464,7 @@
                                                     <div>
                                                         <input type="checkbox" id="{{ $item->id }}"
                                                             name="safety_features[]" value="{{ $item->id }}"
-                                                            {{ in_array($item->id, old('safety_features', [])) ? 'checked' : '' }}>
+                                                            {{ in_array($item->id, $details->carFeatures->pluck('car_feature_id')->toArray()) ? 'checked' : '' }}>
                                                         <label for="{{ $item->id }}">{{ $item->name }}</label>
                                                     </div>
                                                 @endforeach
@@ -457,7 +479,7 @@
                                                     <div>
                                                         <input type="checkbox" id="{{ $item->id }}"
                                                             name="comfort_features[]" value="{{ $item->id }}"
-                                                            {{ in_array($item->id, old('comfort_features', [])) ? 'checked' : '' }}>
+                                                            {{ in_array($item->id, $details->carFeatures->pluck('car_feature_id')->toArray()) ? 'checked' : '' }}>
                                                         <label for="{{ $item->id }}">{{ $item->name }}</label>
                                                     </div>
                                                 @endforeach
@@ -467,7 +489,7 @@
                                             <div class="mb-3">
                                                 <label for="metadescription">Description</label>
                                                 <textarea class="form-control" id="metadescription" name="description" rows="5"
-                                                    placeholder="Meta Description">{{ old('description') }}</textarea>
+                                                    placeholder="Meta Description">{{ $details->description }}</textarea>
                                                 @error('description')
                                                     <div class="text-sm text-danger">
                                                         {{ $message }}

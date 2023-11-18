@@ -54,4 +54,34 @@ class Car extends Model
     {
         return $this->hasMany(CarImage::class);
     }
+
+    public function carFeatureItems()
+    {
+        return $this->hasMany(CarFeatureItem::class, 'car_id');
+    }
+
+    public function make()
+    {
+        return $this->belongsTo(CarMake::class, 'make_id');
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(CarModel::class, 'model_id');
+    }
+
+    public function bodyType()
+    {
+        return $this->belongsTo(BodyType::class, 'body_type', 'slug');
+    }
+
+    public function interiorType()
+    {
+        return $this->belongsTo(Interior::class, 'interior', 'slug');
+    }
+
+    public function carFeatures()
+    {
+        return $this->hasMany(CarFeatureItem::class, 'car_id');
+    }
 }

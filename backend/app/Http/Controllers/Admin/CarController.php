@@ -94,8 +94,10 @@ class CarController extends Controller
     public function show($slug)
     {
         $details = Car::where("slug", $slug)->first();
+        $comfortFeatures = CarFeature::where('type', CarFeature::TYPE_COMFORT)->get();
+        $safetyFeatures = CarFeature::where('type', CarFeature::TYPE_SAFETY)->get();
 
-        return view('admin.inventory.details', compact('details'));
+        return view('admin.inventory.details', compact('details', "comfortFeatures", "safetyFeatures"));
 
     }
 
@@ -113,7 +115,7 @@ class CarController extends Controller
         $comfortFeatures = CarFeature::where('type', CarFeature::TYPE_COMFORT)->get();
         $safetyFeature = CarFeature::where('type', CarFeature::TYPE_SAFETY)->get();
         return view(
-            "admin.inventory.create",
+            "admin.inventory.edit",
             compact("details", "bodyTypes", "carMakes", "carModels", "interiors", "comfortFeatures", "safetyFeature")
         );
     }
@@ -121,9 +123,81 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCarRequest $request, Car $car)
+    public function update(UpdateCarRequest $request, $slug)
     {
-        //
+        try {
+            // Validate all the request items
+            $validatedData = $request->validated();
+
+            $car = Car::where("slug", $slug)->first();
+
+
+
+            // Get the existing car features
+            $existingFeatures = $car->carFeatures()->pluck('car_feature_id')->toArray();
+
+
+            // Delete car features that are not present in the selected features
+            $deletedSafetyFeatures = array_diff($existingFeatures, $request->safety_features);
+            $deletedComfortFeatures = array_diff($existingFeatures, $request->comfort_features);
+
+            CarFeatureItem::whereIn('car_feature_id', $deletedSafetyFeatures)->delete();
+            CarFeatureItem::whereIn('car_feature_id', $deletedComfortFeatures)->delete();
+
+            // Add new car features from the request
+            $newSafetyFeatures = array_diff($request->safety_features, $existingFeatures);
+            $newComfortFeatures = array_diff($request->comfort_features, $existingFeatures);
+
+            foreach ($newSafetyFeatures as $safetyFeature) {
+                CarFeatureItem::create([
+                    'car_id' => $car->id,
+                    'car_feature_id' => $safetyFeature,
+                    'feature_type' => 'safety'
+                ]);
+            }
+
+            foreach ($newComfortFeatures as $comfortFeature) {
+                CarFeatureItem::create([
+                    'car_id' => $car->id,
+                    'car_feature_id' => $comfortFeature,
+                    'feature_type' => 'comfort'
+                ]);
+            }
+
+
+            // Create a new Car object in the database
+            $updateCar = $car->update($validatedData);
+
+
+            // Create the comfort and safetu features
+            foreach ($request->safety_features as $safetyFeature) {
+                $createSafetuFeature = CarFeatureItem::create([
+                    'car_id' => $car->id,
+                    'car_feature_id' => $safetyFeature
+                ]);
+            }
+
+
+
+            foreach ($request->comfort_features as $safetyFeature) {
+                $createSafetuFeature = CarFeatureItem::create([
+                    'car_id' => $car->id,
+                    'car_feature_id' => $safetyFeature
+                ]);
+            }
+
+            Log::info("Update" . $updateCar);
+
+            Log::info("Car" . $car);
+
+
+            // Redirect to a specific route with a success message
+            return redirect()->route("inventory.show", $car->slug)->with("success", "Vehicle details updated successfully.");
+        } catch (\Exception $e) {
+            // Handle the exception
+            Log::info($e);
+            return redirect()->back()->with("error", "An error occurred while storing the car.Please try again");
+        }
     }
 
     /**

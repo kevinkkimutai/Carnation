@@ -30,6 +30,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('inventory/remove_featured', [CarController::class, 'removeFeatured'])->name('inventory.removeFeatured');
         Route::get('inventory/images/{slug}', [CarController::class, 'images'])->name('inventory.images');
         Route::post('inventory/images/upload/{slug}', [CarController::class, 'uploadImages'])->name('inventory.images.upload');
+        Route::post('inventory/update_submit/{slug}', [CarController::class, 'update'])->name('inventory.update.submit');
     });
 
 });
