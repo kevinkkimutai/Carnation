@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -24,10 +26,21 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     });
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'profile'])->name('profile');
+        Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/password_update', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    });
+
+    Route::resource('users', UserController::class);
+    Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::get('/users/activate/{id}', [UserController::class, 'activate'])->name('users.activate');
+    Route::get('/users/deactivate/{id}', [UserController::class, 'deactivate'])->name('users.deactivate');
+
     Route::prefix('admin')->group(function () {
         Route::resource('inventory', CarController::class);
-        Route::get('inventory/set_featured', [CarController::class, 'setFeatured'])->name('inventory.setFeatured');
-        Route::get('inventory/remove_featured', [CarController::class, 'removeFeatured'])->name('inventory.removeFeatured');
+        Route::get('inventory/feature/{id}', [CarController::class, 'feature'])->name('inventory.feature');
+        Route::get('inventory/unfeature/{id}', [CarController::class, 'unfeature'])->name('inventory.unfeature');
         Route::get('inventory/images/{slug}', [CarController::class, 'images'])->name('inventory.images');
         Route::post('inventory/images/upload/{slug}', [CarController::class, 'uploadImages'])->name('inventory.images.upload');
         Route::post('inventory/update_submit/{slug}', [CarController::class, 'update'])->name('inventory.update.submit');

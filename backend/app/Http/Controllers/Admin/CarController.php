@@ -24,7 +24,11 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car::paginate(30);
+
+        $title = "All Cars (" . Car::count() . ")";
+
+        return view("admin.inventory.index", compact("cars", "title"));
     }
 
     /**
@@ -254,5 +258,24 @@ class CarController extends Controller
 
 
         return response()->json(["messages", "Successfully Uploaded"]);
+    }
+
+
+    public function feature($id)
+    {
+        $car = Car::where("id", $id)->first();
+
+        $car->update(['featured' => true]);
+
+        return back()->with('success', $car->title . " added to featured list");
+    }
+
+    public function unfeature($id)
+    {
+        $car = Car::where("id", $id)->first();
+
+        $car->update(['featured' => false]);
+
+        return back()->with('success', $car->title . " removed from featured list");
     }
 }

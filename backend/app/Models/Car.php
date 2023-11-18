@@ -35,7 +35,8 @@ class Car extends Model
         'car_usage',
         'category',
         'created_by_id',
-        'submission_complete'
+        'submission_complete',
+        'featured'
     ];
 
 
@@ -83,5 +84,10 @@ class Car extends Model
     public function carFeatures()
     {
         return $this->hasMany(CarFeatureItem::class, 'car_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 }

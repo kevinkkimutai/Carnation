@@ -30,7 +30,8 @@ class User extends Authenticatable
         'role',
         'password',
         'last_login',
-        'created_by_id'
+        'created_by_id',
+        'is_active'
     ];
 
     /**

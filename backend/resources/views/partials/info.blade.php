@@ -7,26 +7,26 @@
 @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
 
-        <strong>{{ $message }}</strong>
+        {{ $message }}
     </div>
 @endif
 
 @if ($message = Session::get('warning'))
     <div class="alert alert-warning alert-block">
 
-        <strong>{{ $message }}</strong>
+        {{ $message }}
     </div>
 @endif
 
 @if ($message = Session::get('info'))
     <div class="alert alert-info alert-block">
 
-        <strong>{{ $message }}</strong>
+        {{ $message }}
     </div>
 @endif
 
-@if ($errors->any())
+{{-- @if ($errors->any())
     <div class="alert alert-danger">
         {{ $errors }}
     </div>
-@endif
+@endif --}}

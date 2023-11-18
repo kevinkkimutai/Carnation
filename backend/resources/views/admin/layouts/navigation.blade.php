@@ -25,7 +25,7 @@
 
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('inventory.index') }}" class=" waves-effect">
                         <i class="bx bx-list-ul"></i>
                         <span key="t-layouts">All </span>
                     </a>
@@ -76,29 +76,29 @@
                 </li>
                 <li class="menu-title" key="t-apps">My profile</li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('profile') }}" class=" waves-effect">
                         <i class="bx bx-user"></i>
                         <span key="t-layouts">Profile</span>
                     </a>
 
                 </li>
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class=" waves-effect">
                         <i class="bx bx-layout"></i>
                         <span key="t-layouts">Settings</span>
                     </a>
 
-                </li>
+                </li> --}}
                 <li class="menu-title" key="t-apps">User management</li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('users.index') }}" class=" waves-effect">
                         <i class="bx bx-layout"></i>
                         <span key="t-layouts">User list</span>
                     </a>
 
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('users.create') }}" class=" waves-effect">
                         <i class="bx bx-user-plus"></i>
                         <span key="t-layouts">Add User</span>
                     </a>

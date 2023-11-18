@@ -75,10 +75,17 @@
                                                         class="btn btn-sm btn-outline-success waves-effect  mt-2 waves-light">
                                                         <i class="bx bx-edit-alt me-2"></i>Edit Car
                                                     </a>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-warning waves-effect  mt-2 waves-light">
-                                                        <i class="bx bx-star me-2"></i>Set featured
-                                                    </button>
+                                                    @if ($details->featured)
+                                                        <a href="{{ route('inventory.unfeature', $details->id) }}"
+                                                            class="btn btn-sm btn-outline-danger  mt-2 waves-light">
+                                                            <i class="bx bx-x-circle me-2"></i>
+                                                            Un-feature</a>
+                                                    @else
+                                                        <a href="{{ route('inventory.feature', $details->id) }}"
+                                                            class="btn btn-sm btn-outline-info  mt-2 waves-light">
+                                                            <i class="bx bx-star me-2"></i>
+                                                            Feature</a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +276,7 @@
                                 </div>
                                 <!-- end Specifications -->
 
-                                <div class="mt-5">
+                                {{-- <div class="mt-5">
                                     <h5>Messages :</h5>
 
                                     <div class="d-flex py-3 border-bottom">
@@ -374,7 +381,7 @@
                                                     class="far fa-calendar-alt text-primary me-1"></i> 05 Oct, 2019</div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
