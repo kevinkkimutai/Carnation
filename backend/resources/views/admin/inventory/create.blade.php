@@ -30,21 +30,39 @@
                             <div class="card-body">
 
                                 <h4 class="card-title">Basic Information</h4>
+                                @include('partials.info')
 
-                                <form>
+                                <form method="POST" action="{{ route('inventory.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="mb-3">
                                                 <label for="productname">Title</label>
                                                 <input id="productname" name="title" type="text" class="form-control"
                                                     placeholder="Product Name" value="{{ old('title') }}">
+
                                                 @error('title')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
+                                        {{-- <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label for="manufacturername">Negotiable</label>
+                                                <select class="form-control select2" name="negotiable">
+                                                    <option value="negotiable">Negotiable</option>
+                                                    <option value="fixed">Fixed</option>
+
+                                                </select>
+                                                @error('negotiable')
+                                                     <div class="text-sm text-danger" >
+                                                       {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div> --}}
                                         <div class="col-sm-4">
                                             <div class="mb-3">
                                                 <label for="manufacturername">Make</label>
@@ -57,9 +75,9 @@
                                                     @endforeach
                                                 </select>
                                                 @error('make_id')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -68,15 +86,15 @@
                                                 <label for="manufacturername">Model</label>
                                                 <select class="form-control select2" name="model_id">
                                                     @foreach ($carModels as $item)
-                                                        <option value="{{ $item->slug }}"
+                                                        <option value="{{ $item->id }}"
                                                             {{ old('model_id') == $item->slug ? 'selected' : '' }}>
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('model_id')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -92,9 +110,9 @@
                                                     @endforeach
                                                 </select>
                                                 @error('body_type')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -104,9 +122,9 @@
                                                 <input id="manufacturerbrand" name="year" type="number"
                                                     class="form-control" placeholder="YOM" value="{{ old('year') }}">
                                                 @error('year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -117,9 +135,9 @@
                                                     class="form-control" placeholder="Mileage"
                                                     value="{{ old('mileage') }}">
                                                 @error('mileage')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -129,9 +147,9 @@
                                                 <input id="manufacturerbrand" name="cc" type="number"
                                                     class="form-control" placeholder="CC" value="{{ old('cc') }}">
                                                 @error('cc')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -142,21 +160,7 @@
                                                     placeholder="Price" value="{{ old('price') }}">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <label for="manufacturername">Negotiable</label>
-                                                <select class="form-control select2" name="negotiable">
-                                                    <option value="negotiable">Negotiable</option>
-                                                    <option value="fixed">Fixed</option>
 
-                                                </select>
-                                                @error('negotiable')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div> --}}
                                         <div class="col-sm-4">
                                             <div class="mb-3">
                                                 <label for="manufacturername">Transmission</label>
@@ -169,9 +173,9 @@
                                                     </option>
                                                 </select>
                                                 @error('transmission')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -186,9 +190,9 @@
                                                     @endforeach
                                                 </select>
                                                 @error('interior')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -243,9 +247,9 @@
                                                         Plug-In Hybrid All-Wheel</option>
                                                 </select>
                                                 @error('drive_train')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -276,25 +280,27 @@
                                                     </option>
                                                 </select>
                                                 @error('fuel')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="mb-3">
                                                 <label for="manufacturername">Usage</label>
-                                                <select class="form-control select2" name="usage">
-
-                                                    <option value="new">New</option>
-                                                    <option value="foreign">Foreign Used</option>
-                                                    <option value="local">Locally used</option>
+                                                <select class="form-control select2" name="car_usage">
+                                                    <option {{ old('car_usage') == 'new' ? 'selected' : '' }}
+                                                        value="new">New</option>
+                                                    <option {{ old('car_usage') == 'foreign' ? 'selected' : '' }}
+                                                        value="foreign">Foreign Used</option>
+                                                    <option {{ old('car_usage') == 'local' ? 'selected' : '' }}
+                                                        value="local">Locally used</option>
                                                 </select>
-                                                @error('usage')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                @error('car_usage')
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -310,9 +316,9 @@
                                                         Unavailable</option>
                                                 </select>
                                                 @error('availability')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -323,10 +329,10 @@
                                                 <input id="manufacturerbrand" name="color" type="text"
                                                     class="form-control" placeholder="Color"
                                                     value="{{ old('color') }}">
-                                                @error('year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                @error('color')
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -335,11 +341,11 @@
                                                 <label for="manufacturerbrand">Top Speed</label>
                                                 <input id="manufacturerbrand" name="top_speed" type="number"
                                                     class="form-control" placeholder="Top Speed"
-                                                    value="{{ old('speed') }}">
+                                                    value="{{ old('top_speed') }}">
                                                 @error('top_speed')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -350,9 +356,9 @@
                                                     class="form-control" placeholder="Number of seats"
                                                     value="{{ old('seat_number') }}">
                                                 @error('seat_number')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -364,9 +370,9 @@
                                                     class="form-control" placeholder="Number of doors"
                                                     value="{{ old('doors') }}">
                                                 @error('doors')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -385,9 +391,9 @@
                                                     </option>
                                                 </select>
                                                 @error('steering')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -409,9 +415,9 @@
                                                         Hydraulic Power Steering</option>
                                                 </select>
                                                 @error('steering_type')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -463,9 +469,9 @@
                                                 <textarea class="form-control" id="metadescription" name="description" rows="5"
                                                     placeholder="Meta Description">{{ old('description') }}</textarea>
                                                 @error('description')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                                    <div class="text-sm text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>

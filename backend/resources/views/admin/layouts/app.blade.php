@@ -22,7 +22,7 @@
 
     <!-- dropzone css -->
     <link href="{{ asset('assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
-
+    @livewireStyles
 </head>
 
 <body data-sidebar="dark" data-layout-mode="light">
@@ -157,6 +157,7 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>

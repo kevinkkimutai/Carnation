@@ -40,7 +40,7 @@ class AuthController extends Controller
 
 
 
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('dashboard');
 
         } else {
             // validation not successful, send back to form

@@ -27,6 +27,6 @@
 
 @if ($errors->any())
     <div class="alert alert-danger">
-        Check the error below :(
+        {{ $errors }}
     </div>
 @endif

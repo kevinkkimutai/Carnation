@@ -12,6 +12,6 @@ class CarFeatureItem extends Model
     protected $fillable = [
         'car_id',
         'car_feature_id',
-        'available'
+        'available',
     ];
 }
