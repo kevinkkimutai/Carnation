@@ -32,21 +32,21 @@
 
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('inventory.index', ['type' => 'new']) }}" class=" waves-effect">
                         <i class="bx bx-list-plus"></i>
                         <span key="t-layouts">New </span>
                     </a>
 
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('inventory.index', ['type' => 'local']) }}" class=" waves-effect">
                         <i class="bx bx-list-minus"></i>
                         <span key="t-layouts">Locally used</span>
                     </a>
 
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('inventory.index', ['category' => 'foreign']) }}" class=" waves-effect">
                         <i class="bx bx-list-ol"></i>
                         <span key="t-layouts">Marketplace</span>
                     </a>

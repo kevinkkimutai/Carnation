@@ -13,10 +13,19 @@
                             <h4 class="mb-sm-0 font-size-18">{{ $title }} </h4>
 
                             <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inventory</a></li>
-                                    <li class="breadcrumb-item active">{{ $title }}</li>
-                                </ol>
+                                <div class="flex">
+                                    <div class="flex">
+                                        <a class="btn btn-sm btn-outline-success" href="{{ route('inventory.create') }}">Add
+                                            new new
+                                            <i class="bx bx-plus"></i></a>
+                                    </div>
+                                    <div>
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Inventory</a></li>
+                                            <li class="breadcrumb-item active">{{ $title }}</li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
