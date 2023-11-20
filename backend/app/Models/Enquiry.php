@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CarMake extends Model
+class Enquiry extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'slug',
-        'name'
+        'car_id',
+        'first_name',
+        'last_name',
+        'phone',
+        'message'
     ];
-
-    public function carModels()
-    {
-        return $this->hasMany(CarModel::class, 'car_make_id');
-    }
-
-    // Vehicles
 }
