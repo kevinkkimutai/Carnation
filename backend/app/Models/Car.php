@@ -53,7 +53,7 @@ class Car extends Model
 
     public function images()
     {
-        return $this->hasMany(CarImage::class);
+        return $this->hasMany(CarImage::class)->orderBy('order', 'ASC');
     }
 
     public function carFeatureItems()

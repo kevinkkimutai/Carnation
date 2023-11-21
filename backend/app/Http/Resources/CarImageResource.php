@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BodyTypeResource extends JsonResource
+class CarImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,8 @@ class BodyTypeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "slug" => $this->slug
+            'url' => env('AWS_BASE_URL') . $this->image_url,
+            'order' => $this->order
         ];
     }
 }
