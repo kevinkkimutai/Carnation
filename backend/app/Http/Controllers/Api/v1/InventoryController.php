@@ -17,7 +17,7 @@ class InventoryController extends Controller
 {
     public function featured()
     {
-        $featured = Car::where('featured', true)->where('submission_complete', true)->paginate(15);
+        $featured = Car::where('featured', true)->where('submission_complete', true)->paginate(4);
 
 
         return CarResource::collection($featured);
@@ -38,7 +38,7 @@ class InventoryController extends Controller
             $inventory->where('category', $request->category);
         }
 
-        $inventory = $inventory->orderBy('id', 'desc')->paginate(15);
+        $inventory = $inventory->orderBy('id', 'desc')->paginate(4);
 
         return CarResource::collection($inventory);
     }
@@ -99,7 +99,7 @@ class InventoryController extends Controller
         }
 
 
-        $inventory = $inventory->orderBy('id', 'desc')->paginate(15);
+        $inventory = $inventory->orderBy('id', 'desc')->paginate(20);
 
         return CarResource::collection($inventory);
 

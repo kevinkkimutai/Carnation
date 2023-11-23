@@ -115,6 +115,11 @@
                                                             @endif
                                                             <a href="{{ route('inventory.show', $car->slug) }}"
                                                                 class="btn btn-sm btn-outline-success m-1">Details</a>
+                                                            @if (!$car->submission_complete)
+                                                                <a href="{{ route('inventory.images', $car->slug) }}"
+                                                                    class="btn btn-sm btn-outline-warning m-1">Complete
+                                                                    submission</a>
+                                                            @endif
 
                                                         </div>
                                                     </td>

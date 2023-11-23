@@ -54,7 +54,7 @@ class CarResource extends JsonResource
             "model" => new CarModelMakeResource($this->model),
             "body_type" => new BodyTypeResource($this->bodyType),
             "year" => $this->year,
-            "price" => $this->price,
+            "price" => number_format($this->price),
             "mileage" => $this->mileage,
             "cc" => $this->cc,
             "transmission" => $this->transmission,

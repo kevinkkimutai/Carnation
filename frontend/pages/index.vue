@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-5">
     <div class="topcont">
       <main class="bg-white dark:bg-gray-900 w-full">
         <div class="relative pt-1 mb-8 sm:mb-0 w-full inset-0 pb-0 landing">
@@ -48,43 +48,7 @@
         <!-- end -->
         <Search />
         <!-- car list -->
-        <section class="mt-0 min-w-lg">
-          <div class="container mx-auto opacity-100">
-            <div class="flex flex-wrap">
-              <div class="w-full md:w-full text-center">
-                <div
-                  class="relative flex flex-col min-w-0 break-words w-full mb-2 rounded-lg"
-                >
-                  <!-- searvh section -->
-
-                  <div
-                    class="md:px-0 px-2 grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full"
-                    id="cardContainer"
-                  >
-                    <!-- Card 1 -->
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                    <car-component></car-component>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+        <Featured />
         <!-- dexription -->
         <div class="container mx-auto pt-5 opacity-100">
           <div class="flex flex-wrap">
@@ -224,6 +188,7 @@ import Vue from "vue";
 import Logos from "../components/icons/logos.vue";
 import Search from "../components/cars/search.vue";
 import CarComponent from "../components/cars/car-component.vue";
+import Featured from "../components/cars/featured.vue";
 
 export default Vue.extend({
   name: "IndexPage",
@@ -232,6 +197,7 @@ export default Vue.extend({
     Logos,
     Search,
     CarComponent,
+    Featured,
   },
 });
 </script>

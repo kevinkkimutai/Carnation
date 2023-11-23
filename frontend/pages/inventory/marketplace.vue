@@ -8,7 +8,7 @@
             <div
               class="md:px-0 px-2 relative flex flex-col min-w-0 break-words w-full mb-2 rounded-lg"
             >
-              <p class="font-bold mb-3 text-white">Our inventory</p>
+              <p class="font-bold mb-3 text-white">Our marketplace</p>
               <!-- searvh section -->
               <Search />
 
@@ -17,22 +17,7 @@
                 id="cardContainer"
               >
                 <!-- Card 1 -->
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
-                <car-component></car-component>
+                <CarComponent v-for="car in cars" :key="car.id" :car="car" />
               </div>
 
               <!-- <div class="flex justify-center pt-5 space-x-2">
@@ -147,12 +132,29 @@
 import Vue from "vue";
 import CarComponent from "../../components/cars/car-component.vue";
 import Search from "../../components/cars/search.vue";
-
+import { mapActions, mapState } from "vuex";
 export default Vue.extend({
   name: "Cars",
   components: {
     CarComponent,
     Search,
+  },
+
+  computed: {
+    ...mapState("inventory", ["cars"]),
+  },
+
+  methods: {
+    ...mapActions("inventory", ["getCars"]),
+  },
+
+  async fetch() {
+    // Assuming you have variables like type, car_usage, and category defined in your data
+
+    const category = "marketplace"; // Replace with your actual value
+
+    // Call the getCats method with the required parameters
+    await this.getCars(category);
   },
 });
 </script>
