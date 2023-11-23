@@ -99,7 +99,7 @@ class InventoryController extends Controller
         }
 
 
-        $inventory = $inventory->orderBy('id', 'desc')->paginate(20);
+        $inventory = $inventory->orderBy('id', 'desc')->paginate(4);
 
         return CarResource::collection($inventory);
 

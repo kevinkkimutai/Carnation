@@ -126,16 +126,16 @@
                   </div>
                   <div class="relative z-0 w-full mb-2 group">
                     <label
-                      for="usage"
+                      for="car_usage"
                       class="block mb-2 ms-2 text-sm font-medium text-gray-900 dark:text-white"
                       >Usage</label
                     >
                     <select
                       id="small"
-                      v-model="usage"
+                      v-model="car_usage"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <!-- <option selected>Select car usage</option> -->
+                      <!-- <option selected>Select car car_usage</option> -->
                       <option value="local">Locally used</option>
                       <option value="foreign">Foreign used</option>
                     </select>
@@ -178,7 +178,7 @@ export default Vue.extend({
       max_year: null,
       min_price: null,
       max_price: null,
-      usage: "foreign",
+      car_usage: null,
     };
   },
   async fetch() {
@@ -219,7 +219,7 @@ export default Vue.extend({
       if (this.max_year) params.max_year = this.max_year;
       if (this.min_price) params.min_price = this.min_price;
       if (this.max_price) params.max_price = this.max_price;
-      params.usage = this.usage;
+      if (this.car_usage) params.car_usage = this.car_usage;
 
       // Redirect to the search page with the selected parameters
       this.$router.push({ path: "/inventory/search", query: params });

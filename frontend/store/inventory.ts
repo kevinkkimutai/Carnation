@@ -48,4 +48,26 @@ export const actions = {
       return { success: false, error: error.message }; // Adjust as needed
     }
   },
+  async searchCars({ vuexContext: any }, { queryString, page = undefined }) {
+    try {
+      const baseSearch = queryString;
+      const pageParam = `page=${page || 1}`;
+
+      let url = baseSearch;
+      if (page) {
+        url = `${baseSearch}&${pageParam}`;
+      }
+      console.log("Url", url);
+
+      const fullUrl = `inventory/search?${url}`;
+
+      const response = await createAxios().get(fullUrl);
+
+      console.log(response);
+
+      return { success: true, data: response.data };
+    } catch (error) {
+      return { success: false, error: error.message }; // Adjust as needed
+    }
+  },
 };
