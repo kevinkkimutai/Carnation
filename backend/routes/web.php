@@ -3,10 +3,13 @@
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\MigrateController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
+
+Route::get('migrate', [MigrateController::class, 'migrate']);
 
 
 Route::prefix('auth')->group(function () {

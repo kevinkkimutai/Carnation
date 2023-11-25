@@ -31,8 +31,6 @@ export const actions = {
         page, // Add the page parameter
       };
 
-      console.log("Params", params);
-
       // Add optional parameters if they are defined
       // Example: params.min_price = minPrice;
       //          params.max_price = maxPrice;
@@ -57,17 +55,36 @@ export const actions = {
       if (page) {
         url = `${baseSearch}&${pageParam}`;
       }
-      console.log("Url", url);
 
       const fullUrl = `inventory/search?${url}`;
 
       const response = await createAxios().get(fullUrl);
 
-      console.log(response);
-
       return { success: true, data: response.data };
     } catch (error) {
       return { success: false, error: error.message }; // Adjust as needed
+    }
+  },
+  async getDetails({ vuexContext: any }, carId) {
+    try {
+      const fullUrl = `inventory/details/${carId}`;
+
+      const response = await createAxios().get(fullUrl);
+
+      return { success: true, data: response.data.data };
+    } catch (error) {
+      return { success: false, error: error.message }; // Adjust as needed
+    }
+  },
+  async sendEnquiry({ vuexContext: any }, payload) {
+    try {
+      const fullUrl = `inventory/enquire`;
+
+      const response = await createAxios().post(fullUrl, payload);
+
+      return { success: true, data: response.data };
+    } catch (error) {
+      return { success: false, error: error.response.data }; // Adjust as needed
     }
   },
 };

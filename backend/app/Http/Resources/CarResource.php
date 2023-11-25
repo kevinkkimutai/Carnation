@@ -72,6 +72,8 @@ class CarResource extends JsonResource
             "car_usage" => $this->car_usage,
             "submission_complete" => $this->submission_complete,
             "featured" => $this->featured,
+            "youtube_url" => $this->youtube_url,
+            "youtube_video_code" => $this->youtube_video_code,
             "featured_image" => env('AWS_BASE_URL') . $this->images->first()->image_url,
             "images" => CarImageResource::collection($this->images),
             "safety_features" => FeatureResource::collection($comfortCarFeatureList),
