@@ -274,114 +274,73 @@
                                     </div>
 
                                 </div>
-                                <!-- end Specifications -->
+                                <div class="row pt-5">
+                                    <div class="col-lg-12">
+                                        <h3>Car enquiries</h3>
 
-                                {{-- <div class="mt-5">
-                                    <h5>Messages :</h5>
+                                        <div class="table-responsive">
+                                            <table class="table align-middle table-nowrap table-hover">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th scope="col" style="width: 70px;">#</th>
 
-                                    <div class="d-flex py-3 border-bottom">
-                                        <div class="flex-shrink-0 me-3">
-                                            <img src="assets/images/users/avatar-2.jpg" class="avatar-xs rounded-circle"
-                                                alt="img" />
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Phone</th>
+                                                        <th scope="col">Created at</th>
+                                                        <th scope="col">Message</th>
+
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($details->enquiries as $index => $message)
+                                                        <tr>
+                                                            <td>
+                                                                {{ ++$index }}
+                                                            </td>
+
+
+                                                            <td>
+                                                                {{ $message->first_name . ' ' . $message->last_name }}
+                                                            </td>
+
+                                                            <td> {{ $message->phone }}</td>
+
+                                                            <td>
+                                                                <div>
+                                                                    {{ $message->message }}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                @if ($message->completed)
+                                                                    <span
+                                                                        class="badge badge-soft-warning font-size-11 m-1">Completed</span>
+                                                                @else
+                                                                    <span
+                                                                        class="badge badge-soft-success font-size-11 m-1">New</span>
+                                                                @endif
+                                                            </td>
+
+                                                            <td>
+                                                                <div>
+
+                                                                    @if (!$message->completed)
+                                                                        <a href="{{ route('enquiries.complete', $message->id) }}"
+                                                                            class="btn btn-sm btn-outline-warning m-1">Mark
+                                                                            completed</a>
+                                                                    @endif
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
 
-                                        <div class="flex-grow-1">
-                                            <h5 class="mb-1 font-size-15">Brian</h5>
-                                            <p class="text-muted">If several languages coalesce, the grammar of the
-                                                resulting language.</p>
-                                            <ul class="list-inline float-sm-end mb-sm-0">
-                                                <li class="list-inline-item">
-                                                    <a href="javascript: void(0);"><i class="far fa-thumbs-up me-1"></i>
-                                                        Like</a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript: void(0);"><i
-                                                            class="far fa-comment-dots me-1"></i> Comment</a>
-                                                </li>
-                                            </ul>
-                                            <div class="text-muted font-size-12"><i
-                                                    class="far fa-calendar-alt text-primary me-1"></i> 5 hrs ago</div>
-                                        </div>
+
                                     </div>
-                                    <div class="d-flex py-3 border-bottom">
-                                        <div class="flex-shrink-0 me-3">
-                                            <img src="assets/images/users/avatar-4.jpg" class="avatar-xs rounded-circle"
-                                                alt="img" />
-                                        </div>
-
-                                        <div class="flex-grow-1">
-                                            <h5 class="font-size-15 mb-1">Denver</h5>
-                                            <p class="text-muted">To an English person, it will seem like simplified
-                                                English, as a skeptical Cambridge</p>
-                                            <ul class="list-inline float-sm-end mb-sm-0">
-                                                <li class="list-inline-item">
-                                                    <a href="javascript: void(0);"><i class="far fa-thumbs-up me-1"></i>
-                                                        Like</a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript: void(0);"><i
-                                                            class="far fa-comment-dots me-1"></i> Comment</a>
-                                                </li>
-                                            </ul>
-                                            <div class="text-muted font-size-12"><i
-                                                    class="far fa-calendar-alt text-primary me-1"></i> 07 Oct, 2019</div>
-                                            <div class="d-flex mt-4">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <img src="assets/images/users/avatar-5.jpg"
-                                                        class="avatar-xs me-3 rounded-circle" alt="img" />
-                                                </div>
-
-                                                <div class="flex-grow-1">
-                                                    <h5 class="mb-1 font-size-15">Henry</h5>
-                                                    <p class="text-muted">Their separate existence is a myth. For science,
-                                                        music, sport, etc.</p>
-                                                    <ul class="list-inline float-sm-end mb-sm-0">
-                                                        <li class="list-inline-item">
-                                                            <a href="javascript: void(0);"><i
-                                                                    class="far fa-thumbs-up me-1"></i> Like</a>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <a href="javascript: void(0);"><i
-                                                                    class="far fa-comment-dots me-1"></i> Comment</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="text-muted font-size-12"><i
-                                                            class="far fa-calendar-alt text-primary me-1"></i> 08 Oct, 2019
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex py-3 border-bottom">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar-xs">
-                                                <span
-                                                    class="avatar-title bg-primary bg-soft text-primary rounded-circle font-size-16">
-                                                    N
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-grow-1">
-                                            <h5 class="mb-1 font-size-15">Neal</h5>
-                                            <p class="text-muted">Everyone realizes why a new common language would be
-                                                desirable.</p>
-                                            <ul class="list-inline float-sm-end mb-sm-0">
-                                                <li class="list-inline-item">
-                                                    <a href="javascript: void(0);"><i class="far fa-thumbs-up me-1"></i>
-                                                        Like</a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript: void(0);"><i
-                                                            class="far fa-comment-dots me-1"></i> Comment</a>
-                                                </li>
-                                            </ul>
-                                            <div class="text-muted font-size-12"><i
-                                                    class="far fa-calendar-alt text-primary me-1"></i> 05 Oct, 2019</div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                                </div>
 
                             </div>
                         </div>

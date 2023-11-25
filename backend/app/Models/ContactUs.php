@@ -13,6 +13,9 @@ class ContactUs extends Model
         'first_name',
         'last_name',
         'phone',
-        'message'
+        'message',
+        'completed',
+        'completed_by_id',
+        'completed_on'
     ];
 }

@@ -107,4 +107,9 @@ class Car extends Model
     {
         return $this->belongsTo(User::class, 'created_by_id');
     }
+
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class);
+    }
 }

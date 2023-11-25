@@ -16,10 +16,9 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/car.png' },
+      { rel: 'icon', type: 'image/x-icon', href: 'car.png' },
       { rel:'stylesheet',href:"https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"},
-      { rel:"stylesheet", href:"https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css"},
-      { rel:"stylesheet", href:"/assets/css/font-awesome/css/font-awesome.min.css" }
+      { rel:"stylesheet", href:"https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css"}
     ],
     script:[
       {src:"https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js",defer:true}

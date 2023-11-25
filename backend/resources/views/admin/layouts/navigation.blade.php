@@ -32,19 +32,13 @@
 
                 </li>
                 <li>
-                    <a href="{{ route('inventory.index', ['type' => 'new']) }}" class=" waves-effect">
+                    <a href="{{ route('inventory.index', ['category' => 'internal']) }}" class=" waves-effect">
                         <i class="bx bx-list-plus"></i>
-                        <span key="t-layouts">New </span>
+                        <span key="t-layouts">Our Inventory </span>
                     </a>
 
                 </li>
-                <li>
-                    <a href="{{ route('inventory.index', ['type' => 'local']) }}" class=" waves-effect">
-                        <i class="bx bx-list-minus"></i>
-                        <span key="t-layouts">Locally used</span>
-                    </a>
 
-                </li>
                 <li>
                     <a href="{{ route('inventory.index', ['category' => 'foreign']) }}" class=" waves-effect">
                         <i class="bx bx-list-ol"></i>
@@ -52,23 +46,17 @@
                     </a>
 
                 </li>
-                {{-- <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
-                        <i class="bx bx-layout"></i>
-                        <span key="t-layouts">Import</span>
-                    </a>
 
-                </li> --}}
                 <li class="menu-title" key="t-apps">Communications</li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('enquiries') }}" class=" waves-effect">
                         <i class="bx bx-notification"></i>
                         <span key="t-layouts">Vehicle enquiries</span>
                     </a>
 
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" waves-effect">
+                    <a href="{{ route('contactus') }}" class=" waves-effect">
                         <i class="bx bx-message"></i>
                         <span key="t-layouts">Contact us</span>
                     </a>

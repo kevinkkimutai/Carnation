@@ -14,6 +14,15 @@ class Enquiry extends Model
         'first_name',
         'last_name',
         'phone',
-        'message'
+        'message',
+        'completed',
+        'completed_by_id',
+        'completed_on'
     ];
+
+
+    public function carDetails()
+    {
+        return $this->belongsTo(Car::class, 'car_id');
+    }
 }

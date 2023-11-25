@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\MigrateController;
@@ -39,6 +41,12 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
     Route::get('/users/activate/{id}', [UserController::class, 'activate'])->name('users.activate');
     Route::get('/users/deactivate/{id}', [UserController::class, 'deactivate'])->name('users.deactivate');
+
+
+    Route::get('/contact_us', [ContactController::class, 'messages'])->name('contactus');
+    Route::get('/contact_us/{id}', [ContactController::class, 'complete'])->name('contactus.complete');
+    Route::get('/enquiries', [EnquiryController::class, 'messages'])->name('enquiries');
+    Route::get('/enquiries/{id}', [EnquiryController::class, 'complete'])->name('enquiries.complete');
 
     Route::prefix('admin')->group(function () {
         Route::resource('inventory', CarController::class);

@@ -22,11 +22,26 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::paginate(30);
+        $cars = Car::where('submission_complete', true);
 
-        $title = "All Cars (" . Car::count() . ")";
+        if ($request->has('category')) {
+            if ($request->category == 'internal') {
+                $title = "Our Inventory";
+                $cars = $cars->where('category', 'internal');
+            } else {
+                $title = "Marketplace";
+                $cars = $cars->where('category', 'marketplace');
+            }
+        } else {
+            $title = "All Cars";
+        }
+
+        $title .= " (" . $cars->count() . ")";
+
+        // Corrected pagination assignment
+        $cars = $cars->orderBy('id', 'desc')->paginate(30);
 
         return view("admin.inventory.index", compact("cars", "title"));
     }
